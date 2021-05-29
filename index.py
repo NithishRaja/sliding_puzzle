@@ -5,9 +5,7 @@
 
 # Dependencies
 import tkinter as tk
-from tkinter import PhotoImage
 from functools import partial
-from PIL import Image
 import random
 
 # Initialise application class
