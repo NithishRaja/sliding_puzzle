@@ -1,0 +1,7 @@
+# Test script
+
+*test.py
+
+# Cache directories
+
+__pycache__/*
