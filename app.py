@@ -11,12 +11,12 @@ import random
 # Initialise application class
 class Application(tk.Frame):
     # Define constructor
-    def __init__(self, master=None):
+    def __init__(self, size, master=None):
         super().__init__(master)
         # Initialise variables
         self.master = master
         self.grid()
-        self.size = 3
+        self.size = size
         # Initialise variable to hold position of empty tile
         self.empty = [self.size-1,self.size-1]
         # Initialise array to hold position of each tile
