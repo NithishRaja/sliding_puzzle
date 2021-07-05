@@ -1,7 +1,9 @@
 # Test script
-
 *test.py
 
 # Cache directories
-
 __pycache__/*
+*.pyc
+
+# Bash scripts
+*.sh
