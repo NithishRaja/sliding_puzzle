@@ -35,7 +35,7 @@ class Application(tk.Frame):
             # Initialise button
             self.button.append( tk.Button(self, text=str(i), relief="sunken") )
             self.button[i].grid(row = int(i/self.size), column = int(i%self.size), padx = 1, pady = 1)
-            self.button[i]["command"] = partial(self.swap, i)
+            self.button[i]["command"] = partial(self.swapButton, i)
 
         # Initialise button to shuffle tiles
         self.shuffle = tk.Button(self, text="Shuffle", command=self.shuffle_tiles)
@@ -49,17 +49,22 @@ class Application(tk.Frame):
             self.shuffle.grid(column=0, row=self.size, columnspan=int(self.size/2))
             self.reset.grid(column=int(self.size/2)+1, row=self.size, columnspan=int(self.size/2))
 
+    # Function to swap positions
+    def swapPosition(self, pos):
+        # Swap positions
+        temp = self.position[pos]
+        self.position[pos] = self.empty
+        self.empty = temp
+
     # Function to move button
-    def swap(self, pos):
-        # Check if button is adjacent to empty space
+    def swapButton(self, pos):
+        # Check if button is adjacent to empty tile
         if self.position[pos][0] == self.empty[0] and abs(self.position[pos][1]-self.empty[1]) < 2:
-            temp = self.position[pos]
-            self.position[pos] = self.empty
-            self.empty = temp
+            # Call function to swap positions
+            self.swapPosition(pos)
         elif self.position[pos][1] == self.empty[1] and abs(self.position[pos][0]-self.empty[0]) < 2:
-            temp = self.position[pos]
-            self.position[pos] = self.empty
-            self.empty = temp
+            # Call function to swap positions
+            self.swapPosition(pos)
         # Call function to refresh display
         self.refresh_display()
 
@@ -67,13 +72,18 @@ class Application(tk.Frame):
     def shuffle_tiles(self):
         # Seed random number generator
         random.seed()
-        # Place tiles in random order
-        for i in range(self.size*self.size-1):
-            # Swap ith element with a random element between i and n
-            rand_pos = random.randint(i, self.size*self.size-2)
-            temp = self.position[i]
-            self.position[i] = self.position[rand_pos]
-            self.position[rand_pos] = temp
+        for count in range(100):
+            # Initialise array to hold positions adjacent to empty tile
+            temp = []
+            # Get list of positions adjacent to empty position
+            for i in range(self.size*self.size-1):
+                # Check if distance between current tile and empty tile is 1
+                if abs(self.position[i][0] - self.empty[0]) + abs(self.position[i][1] - self.empty[1]) == 1:
+                    # Append position to array
+                    temp.append(i)
+            # Select a random position from array
+            randpos = temp[ random.randint(0, len(temp)-1) ]
+            self.swapPosition(randpos)
         # Call function to update display
         self.refresh_display()
 
@@ -82,6 +92,8 @@ class Application(tk.Frame):
         # Set tile positions to original value
         for i in range(self.size*self.size-1):
             self.position[i] = [int(i/self.size), int(i%self.size)]
+        # Set empty tile to original position
+        self.empty = [self.size-1,self.size-1]
         # Call function to update display
         self.refresh_display()
 
