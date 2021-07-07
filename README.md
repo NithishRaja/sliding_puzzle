@@ -8,9 +8,10 @@
 
 * Run `python index.py` to run the application
 
-### Generate graph
+### Solution
 
 * Run `python generate.py` to generate the graph for grid size in `config.json`
+* Run `python shortestPath.py` to calculate the shortest path from solved state to every other state
 
 ## Editing code
 
