@@ -82,7 +82,8 @@ while(not q.empty()):
         # Write data to file
         json.dump({
             "adjacent": adjPos,
-            "visited": False
+            "distance": None,
+            "parent": None
         }, file)
         # Close file
         file.close()
