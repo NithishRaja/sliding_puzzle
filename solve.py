@@ -4,10 +4,10 @@
 #
 
 # Dependencies
-import json, os
+import json, os, sys
 
 # Function to solve given position
-def solve(position]):
+def solve(position):
     # Initialise array to hold all intermediate states
     pathArray = []
     # Read config file
